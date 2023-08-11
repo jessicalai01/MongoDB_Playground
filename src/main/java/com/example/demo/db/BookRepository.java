@@ -13,9 +13,10 @@ public interface BookRepository extends MongoRepository<BookEntity, String> {
     List<BookEntity> findByAuthor(String author);
 
     List<BookEntity> findByGenre(String genre);
-    void deleteByName(String title);
+    BookEntity save(BookEntity bookEntity);
+    void deleteBookByName(String name);
+    void deleteAll();
 
-    @Override
-    <S extends BookEntity> S save(S bookEntity);
+    BookEntity updateBook(String name);
 
 }

@@ -1,38 +1,55 @@
 package com.example.demo.controller;
 
-import com.example.demo.component.BookEntityToObjectConverter;
-import com.example.demo.db.BookEntity;
 import com.example.demo.db.BookObject;
 import com.example.demo.db.BookRepository;
+import com.example.demo.service.BookService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 @Slf4j
 @RestController
 @RequestMapping("/book")
 public class BookController {
-    private BookRepository repository;
-    private BookEntityToObjectConverter entityToObjectConverter;
+    private final BookService bookService;
 
-    @GetMapping
-    public List<BookObject> getBook() {
-        var allBooks = repository.findAll().stream().map(entityToObjectConverter::convert).toList();
-        log.info("Number of books: {}", allBooks.size());
-        return allBooks;
+    public BookController(BookService bookService) {
+        this.bookService = bookService;
     }
-    @PostMapping("/add")
-    public String addBook(BookEntity book) {
-        repository.save(book);
-        return "Added book: " + book.getName();
+
+
+    @GetMapping("/")
+    public ResponseEntity<?> getBook() {
+        var allBooks = bookService.getAllBook();
+        if (allBooks.size()>0){
+            log.info("Starting returning all books");
+            return new ResponseEntity(allBooks, HttpStatus.OK);
+        }
+        return new ResponseEntity("sorry we have no books", HttpStatus.OK);
+
+    }
+    @PostMapping("/save")
+    public ResponseEntity<?> addBook(@RequestBody BookObject bookObject) {
+        bookService.saveAllBooks(bookObject);
+        return new ResponseEntity("New book added!", HttpStatus.OK);
     }
 
     @PostMapping("/delete")
-    public void deleteBook(String name) {
-        repository.deleteByName(name);
+    public ResponseEntity<?> deleteBook(BookObject ob) {
+        bookService.deleteBookByName(ob.getName());
+        return new ResponseEntity("Book deleted!", HttpStatus.OK);
+    }
+    @PostMapping("/deleteAll")
+    public ResponseEntity<?> deleteAllBook() {
+        bookService.deleteAll();
+        return new ResponseEntity("Book deleted!", HttpStatus.OK);
+    }
+
+    @PostMapping("/update")
+    public ResponseEntity<?> updateBook(BookObject ob) {
+        bookService.update(ob.getName());
+        return new ResponseEntity("Book deleted!", HttpStatus.OK);
     }
 
 }

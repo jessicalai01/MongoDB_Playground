@@ -6,9 +6,10 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class BookEntityToObjectConverter {
-    public BookObject convert(BookEntity bookEntity) {
+    public static BookObject convert(BookEntity bookEntity) {
 
         return BookObject.builder()
+                .bookId(bookEntity.getBookId())
                 .name(bookEntity.getName())
                 .author(bookEntity.getAuthor())
                 .genre(bookEntity.getGenre())
