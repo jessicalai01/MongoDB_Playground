@@ -8,7 +8,7 @@ import java.util.List;
 public interface BookRepository extends MongoRepository<BookEntity, String> {
     List<BookEntity>findAll();
 
-    List<BookEntity> findByName(String title);
+    BookEntity findByName(String title);
 
     List<BookEntity> findByAuthor(String author);
 
@@ -17,6 +17,5 @@ public interface BookRepository extends MongoRepository<BookEntity, String> {
     void deleteBookByName(String name);
     void deleteAll();
 
-    BookEntity updateBook(String name);
 
 }

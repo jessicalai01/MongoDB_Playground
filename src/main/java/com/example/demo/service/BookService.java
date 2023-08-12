@@ -4,14 +4,13 @@ import com.example.demo.component.BookEntityToObjectConverter;
 import com.example.demo.component.ObjectToEntityConverter;
 import com.example.demo.db.BookObject;
 import com.example.demo.db.BookRepository;
-import lombok.AllArgsConstructor;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
+
 
 @Service
 @Slf4j
@@ -39,10 +38,6 @@ public class BookService {
     public void deleteAll(){
         repository.deleteAll();
         log.info("Finished deleting ALL book service");
-    }
-    public void update(String name){
-        repository.updateBook(name);
-        log.info("Finished updating book: {}", name);
     }
 
 }

@@ -46,10 +46,5 @@ public class BookController {
         return new ResponseEntity("Book deleted!", HttpStatus.OK);
     }
 
-    @PostMapping("/update")
-    public ResponseEntity<?> updateBook(BookObject ob) {
-        bookService.update(ob.getName());
-        return new ResponseEntity("Book deleted!", HttpStatus.OK);
-    }
 
 }
