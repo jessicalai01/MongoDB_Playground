@@ -1,24 +1,20 @@
-package com.example.demo.db;
+package com.example.demo.model.response;
 
 import lombok.Builder;
 import lombok.Data;
 import lombok.extern.jackson.Jacksonized;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.math.BigInteger;
 
 @Data
 @Builder
 @Jacksonized
-@Document(collection = "book")
-public class BookEntity {
-
+public class BookObject {
     @Id
     private BigInteger bookId;
     private String name;
     private String author;
     private String genre;
     private double rating;
-
 }
