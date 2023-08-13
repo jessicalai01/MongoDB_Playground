@@ -1,7 +1,7 @@
 package com.example.demo.component;
 
-import com.example.demo.db.BookEntity;
-import com.example.demo.db.BookObject;
+import com.example.demo.model.entity.BookEntity;
+import com.example.demo.model.response.BookObject;
 import org.springframework.stereotype.Component;
 
 @Component

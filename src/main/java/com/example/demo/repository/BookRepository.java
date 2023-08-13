@@ -1,4 +1,5 @@
-package com.example.demo.db;
+package com.example.demo.repository;
+import com.example.demo.model.entity.BookEntity;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
@@ -17,6 +18,6 @@ public interface BookRepository extends MongoRepository<BookEntity, String> {
     void deleteBookByName(String name);
     void deleteAll();
 
-    BookEntity updateBook(String name);
+//    BookEntity updateBook(String name);
 
 }

@@ -1,7 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.db.BookObject;
-import com.example.demo.db.BookRepository;
+import com.example.demo.model.response.BookObject;
 import com.example.demo.service.BookService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -22,12 +21,17 @@ public class BookController {
     @GetMapping("/")
     public ResponseEntity<?> getBook() {
         var allBooks = bookService.getAllBook();
-        if (allBooks.size()>0){
+        if (!allBooks.isEmpty()){
             log.info("Starting returning all books");
             return new ResponseEntity(allBooks, HttpStatus.OK);
         }
         return new ResponseEntity("sorry we have no books", HttpStatus.OK);
 
+    }
+    @GetMapping
+    public ResponseEntity<?> getBook(@RequestParam String name) {
+
+        return new ResponseEntity("hello", HttpStatus.OK);
     }
     @PostMapping("/save")
     public ResponseEntity<?> addBook(@RequestBody BookObject bookObject) {
@@ -46,10 +50,10 @@ public class BookController {
         return new ResponseEntity("Book deleted!", HttpStatus.OK);
     }
 
-    @PostMapping("/update")
-    public ResponseEntity<?> updateBook(BookObject ob) {
-        bookService.update(ob.getName());
-        return new ResponseEntity("Book deleted!", HttpStatus.OK);
-    }
+//    @PostMapping("/update")
+//    public ResponseEntity<?> updateBook(BookObject ob) {
+//        bookService.update(ob.getName());
+//        return new ResponseEntity("Book deleted!", HttpStatus.OK);
+//    }
 
 }
