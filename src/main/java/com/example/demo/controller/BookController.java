@@ -1,7 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.model.response.BookObject;
-import com.example.demo.service.BookService;
+import com.example.demo.service.PublicBookService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,16 +11,15 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/book")
 public class BookController {
-    private final BookService bookService;
+    private final PublicBookService publicBookService;
 
-    public BookController(BookService bookService) {
-        this.bookService = bookService;
+    public BookController(PublicBookService publicBookService) {
+        this.publicBookService = publicBookService;
     }
-
 
     @GetMapping("/")
     public ResponseEntity<?> getBook() {
-        var allBooks = bookService.getAllBook();
+        var allBooks = publicBookService.getAllBook();
         if (!allBooks.isEmpty()){
             log.info("Starting returning all books");
             return new ResponseEntity(allBooks, HttpStatus.OK);
@@ -35,18 +34,18 @@ public class BookController {
     }
     @PostMapping("/save")
     public ResponseEntity<?> addBook(@RequestBody BookObject bookObject) {
-        bookService.saveAllBooks(bookObject);
+        publicBookService.saveAllBooks(bookObject);
         return new ResponseEntity("New book added!", HttpStatus.OK);
     }
 
     @PostMapping("/delete")
     public ResponseEntity<?> deleteBook(BookObject ob) {
-        bookService.deleteBookByName(ob.getName());
+        publicBookService.deleteBookByName(ob.getName());
         return new ResponseEntity("Book deleted!", HttpStatus.OK);
     }
     @PostMapping("/deleteAll")
     public ResponseEntity<?> deleteAllBook() {
-        bookService.deleteAll();
+        publicBookService.deleteAll();
         return new ResponseEntity("Book deleted!", HttpStatus.OK);
     }
 
