@@ -16,7 +16,5 @@ public class ObjectToEntityConverter {
                     .rating(ob.getRating())
                     .build();
 
-
-
     }
 }
