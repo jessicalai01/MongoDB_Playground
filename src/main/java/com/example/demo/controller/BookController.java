@@ -27,32 +27,30 @@ public class BookController {
         return new ResponseEntity("sorry we have no books", HttpStatus.OK);
 
     }
-    @GetMapping
-    public ResponseEntity<?> getBook(@RequestParam String name) {
-
-        return new ResponseEntity("hello", HttpStatus.OK);
-    }
     @PostMapping("/save")
     public ResponseEntity<?> addBook(@RequestBody BookObject bookObject) {
         publicBookService.saveAllBooks(bookObject);
         return new ResponseEntity("New book added!", HttpStatus.OK);
     }
+    @PostMapping("/update")
+    public ResponseEntity<?> updateBook(@RequestBody BookObject bookObject) {
+        publicBookService.saveAllBooks(bookObject);
+        return new ResponseEntity("Update book!", HttpStatus.OK);
+    }
 
     @PostMapping("/delete")
-    public ResponseEntity<?> deleteBook(BookObject ob) {
+    public ResponseEntity<?> deleteBook(BookObject ob) throws Exception {
         publicBookService.deleteBookByName(ob.getName());
         return new ResponseEntity("Book deleted!", HttpStatus.OK);
     }
-    @PostMapping("/deleteAll")
-    public ResponseEntity<?> deleteAllBook() {
-        publicBookService.deleteAll();
-        return new ResponseEntity("Book deleted!", HttpStatus.OK);
-    }
 
-//    @PostMapping("/update")
-//    public ResponseEntity<?> updateBook(BookObject ob) {
-//        bookService.update(ob.getName());
-//        return new ResponseEntity("Book deleted!", HttpStatus.OK);
-//    }
+    @GetMapping("/findBookByAuthor")
+    public ResponseEntity<?> findBookByAuthor(@RequestBody BookObject ob) {
+        var books = publicBookService.findBookByAuthor(ob.getAuthor());
+        if (books.isEmpty()){
+            return new ResponseEntity("No books found", HttpStatus.OK);
+        }
+        return new ResponseEntity(books, HttpStatus.OK);
+    }
 
 }
