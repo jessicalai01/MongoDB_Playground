@@ -19,6 +19,6 @@ public class BookEntity {
     private String name;
     private String author;
     private String genre;
-    private double rating;
+    private Double rating;
 
 }

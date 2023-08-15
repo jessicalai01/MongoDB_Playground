@@ -12,5 +12,5 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class MyBoookEntity {
     private String name;
     private String author;
-    private String genre;
+
 }

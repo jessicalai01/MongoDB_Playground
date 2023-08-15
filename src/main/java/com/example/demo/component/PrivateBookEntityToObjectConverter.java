@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class PrivateBookEntityToObjectConverter {
-    public MyBookObject entityToObject(MyBoookEntity myBoookEntity) {
+    public static MyBookObject entityToObject(MyBoookEntity myBoookEntity) {
         return MyBookObject.builder()
                 .name(myBoookEntity.getName())
                 .author(myBoookEntity.getAuthor())

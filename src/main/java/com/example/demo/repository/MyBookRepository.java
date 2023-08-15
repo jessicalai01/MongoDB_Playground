@@ -10,4 +10,5 @@ import java.util.List;
 public interface MyBookRepository extends MongoRepository<MyBoookEntity, String> {
     List<MyBoookEntity> findAll();
     MyBoookEntity save(MyBoookEntity myBoookEntity);
+    void deleteAll();
 }

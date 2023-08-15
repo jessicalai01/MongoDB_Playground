@@ -7,8 +7,10 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class PublicToPrivateConverter {
-    public MyBoookEntity convertToPrivate(BookEntity bookEntity) {
+    public static MyBoookEntity convertToPrivate(BookEntity bookEntity) {
         return MyBoookEntity.builder()
-                .name(bookEntity.getName()).build();
+                .name(bookEntity.getName())
+                .author(bookEntity.getAuthor())
+                .build();
     }
 }

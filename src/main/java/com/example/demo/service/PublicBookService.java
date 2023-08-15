@@ -29,19 +29,25 @@ public class PublicBookService {
         repository.save(ObjectToEntityConverter.convert(bookObject));
         log.info("Finished save book service");
     }
-    public void deleteBookByName(String name){
+    public void deleteBookByName(String name) throws Exception{
         log.info("deleting book: {}", name);
-        repository.deleteBookByName(name);
-        log.info("Finished deleting book service");
+        try{repository.deleteBookByName(name);
+        } catch (Exception e){
+            log.info(String.valueOf(e));
+        } finally {
+            log.info("Finished deleting book service");
+        }
     }
 
     public void deleteAll(){
         repository.deleteAll();
         log.info("Finished deleting ALL book service");
     }
-//    public void update(String name){
-//        repository.updateBook(name);
-//        log.info("Finished updating book: {}", name);
-//    }
+    public List<BookObject> findBookByAuthor(String name){
+        log.info("Starting fetching books");
+        var books = repository.findByAuthor(name).stream().map(BookEntityToObjectConverter::convert).toList();
+        log.info("Fetched books by {}", name);
+        return books;
+    }
 
 }

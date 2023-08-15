@@ -1,20 +1,25 @@
 package com.example.demo.controller;
 
 import com.example.demo.model.entity.BookEntity;
+import com.example.demo.repository.MyBookRepository;
 import com.example.demo.service.ManageMyBookService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
 @RequestMapping("/book")
 public class PrivateBookController {
-    private ManageMyBookService manageMyBookService;
+    private final ManageMyBookService manageMyBookService;
+    private final MyBookRepository privateRepository;
+
+    public PrivateBookController(ManageMyBookService manageMyBookService, MyBookRepository privateRepository) {
+        this.manageMyBookService = manageMyBookService;
+        this.privateRepository = privateRepository;
+    }
+
     @GetMapping("/myList")
     public ResponseEntity<?> getMyList(){
         log.info("getting my list");
@@ -24,10 +29,15 @@ public class PrivateBookController {
         return new ResponseEntity<>(myList, HttpStatus.OK);
     }
     @PostMapping("/saveToMyList")
-    public ResponseEntity<?> saveToMyList(BookEntity bookEntity){
+    public ResponseEntity<?> saveToMyList(@RequestBody BookEntity bookEntity){
         log.info("saving book to my list");
         manageMyBookService.saveBook(bookEntity);
         return new ResponseEntity<>("Made the book mine.", HttpStatus.OK);
+    }
+    @PostMapping("/deleteAll")
+    public ResponseEntity<?> deleteAllBook() {
+        privateRepository.deleteAll();
+        return new ResponseEntity("Book deleted!", HttpStatus.OK);
     }
 
 
