@@ -31,7 +31,9 @@ public class PrivateBookController {
     @PostMapping("/saveToMyList")
     public ResponseEntity<?> saveToMyList(@RequestBody BookEntity bookEntity){
         log.info("saving book to my list");
-        manageMyBookService.saveBook(bookEntity);
+        boolean saved = manageMyBookService.saveBook(bookEntity);
+        if (!saved)
+            return new ResponseEntity<>("Book not found", HttpStatus.OK);
         return new ResponseEntity<>("Made the book mine.", HttpStatus.OK);
     }
     @PostMapping("/deleteAll")

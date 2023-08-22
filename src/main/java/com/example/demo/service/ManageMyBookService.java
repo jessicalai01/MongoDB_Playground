@@ -3,8 +3,6 @@ package com.example.demo.service;
 import com.example.demo.component.PrivateBookEntityToObjectConverter;
 import com.example.demo.component.PublicToPrivateConverter;
 import com.example.demo.model.entity.BookEntity;
-import com.example.demo.model.entity.MyBoookEntity;
-import com.example.demo.model.response.BookObject;
 import com.example.demo.model.response.MyBookObject;
 import com.example.demo.repository.BookRepository;
 import com.example.demo.repository.MyBookRepository;
@@ -22,12 +20,18 @@ public class ManageMyBookService {
     private final BookRepository publicRepository;
     private final PublicBookService publicBookService;
 
-    public void saveBook(BookEntity bookEntity){
-        log.info("saving book: {} into private repository", bookEntity.getName());
-        var books = publicRepository.findByName(bookEntity.getName());
-        var bookToSave = PublicToPrivateConverter.convertToPrivate(books);
-        privateRepository.save(bookToSave);
-        log.info("Finished save book service");
+    public boolean saveBook(BookEntity bookEntity){
+        log.info("saving book: {} into private repository", bookEntity.getTitle());
+        var books = publicRepository.findByTitle(bookEntity.getTitle());
+        if (books != null){
+            var bookToSave = PublicToPrivateConverter.convertToPrivate(books);
+            privateRepository.save(bookToSave);
+            log.info("Finished save book service");
+            return true;
+        } else{
+            log.info("Book not found");
+            return false;
+        }
     }
     public List<MyBookObject> getMyBook(){
         log.info("getting all books from private repository");

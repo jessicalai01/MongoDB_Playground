@@ -16,7 +16,7 @@ public class BookEntity {
 
     @Id
     private BigInteger bookId;
-    private String name;
+    private String title;
     private String author;
     private String genre;
     private Double rating;

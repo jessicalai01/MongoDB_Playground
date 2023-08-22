@@ -1,0 +1,32 @@
+body{
+    background-color: black;
+    color: #D5CEA3;
+    align-item:center
+    display: block
+}
+footer{
+    background-color: var(--background-secondary);
+    padding: 2rem 1rem;
+    position: relative;
+}
+.container{
+    display: flex;
+    flex-director: row;
+    justify-content: center; /* Horizontally center */
+    align-items: center; /* Vertically center */
+    height: 50vh; /* Set a fixed viewport height */
+}
+.pic{
+    display: block;
+    background-color: red;
+    size: 50px;
+
+}
+.book-form{
+display: block;
+align-item: center;
+}
+
+
+
+

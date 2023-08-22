@@ -10,7 +10,7 @@ public class BookEntityToObjectConverter {
 
         return BookObject.builder()
                 .bookId(bookEntity.getBookId())
-                .name(bookEntity.getName())
+                .title(bookEntity.getTitle())
                 .author(bookEntity.getAuthor())
                 .genre(bookEntity.getGenre())
                 .rating(bookEntity.getRating())

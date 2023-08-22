@@ -13,7 +13,7 @@ import java.math.BigInteger;
 public class BookObject {
     @Id
     private BigInteger bookId;
-    private String name;
+    private String title;
     private String author;
     private String genre;
     private double rating;

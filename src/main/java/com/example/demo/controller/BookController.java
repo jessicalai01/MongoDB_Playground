@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 @RestController
 @RequestMapping("/book")
+@CrossOrigin
 public class BookController {
     private final PublicBookService publicBookService;
 
@@ -38,10 +39,10 @@ public class BookController {
         return new ResponseEntity("Update book!", HttpStatus.OK);
     }
 
-    @PostMapping("/delete")
-    public ResponseEntity<?> deleteBook(BookObject ob) throws Exception {
-        publicBookService.deleteBookByName(ob.getName());
-        return new ResponseEntity("Book deleted!", HttpStatus.OK);
+    @DeleteMapping("/delete")
+    public void deleteBook(@RequestBody BookObject ob) throws Exception {
+        publicBookService.deleteBookByBookTitle(ob.getTitle());
+
     }
 
     @GetMapping("/findBookByAuthor")

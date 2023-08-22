@@ -9,8 +9,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Data
 @Jacksonized
 @Document(collection = "MyBook")
-public class MyBoookEntity {
-    private String name;
+public class MyBookEntity {
+    private String title;
     private String author;
+    private Double myRating;
 
 }

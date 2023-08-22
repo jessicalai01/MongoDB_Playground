@@ -8,11 +8,11 @@ import java.util.List;
 @Repository
 public interface BookRepository extends MongoRepository<BookEntity, String> {
     List<BookEntity>findAll();
-    BookEntity findByName(String title);
+    BookEntity findByTitle(String title);
 
     List<BookEntity> findByAuthor(String author);
     BookEntity save(BookEntity bookEntity);
-    void deleteBookByName(String name);
+    void deleteBookByTitle(String name);
     void deleteAll();
 
 }

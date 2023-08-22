@@ -25,13 +25,13 @@ public class PublicBookService {
 
     }
     public void saveAllBooks(BookObject bookObject){
-        log.info("saving book: {}", bookObject.getName());
+        log.info("saving book: {}", bookObject.getTitle());
         repository.save(ObjectToEntityConverter.convert(bookObject));
         log.info("Finished save book service");
     }
-    public void deleteBookByName(String name) throws Exception{
-        log.info("deleting book: {}", name);
-        try{repository.deleteBookByName(name);
+    public void deleteBookByBookTitle(String title) throws Exception{
+        log.info("deleting book: {}", title);
+        try{repository.deleteBookByTitle(title);
         } catch (Exception e){
             log.info(String.valueOf(e));
         } finally {
